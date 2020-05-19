@@ -48,15 +48,16 @@ class TodoFragment : Fragment(), OnTodoItemClickedListener {
         val preferences = PreferenceManager.getDefaultSharedPreferences(context)
         val quote = preferences.getString("inspirationalQuote", "")
 
-        shouldShowCompletedTasks = preferences.getBoolean("showCompletedTasks", false)
-        shouldShowUncompletedTasks = preferences.getBoolean("showUncompletedTasks", false)
-
         inspirationalQuote.text = quote
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+        shouldShowCompletedTasks = preferences.getBoolean("showCompletedTasks", false)
+        shouldShowUncompletedTasks = preferences.getBoolean("showUncompletedTasks", false)
+
         viewModel = ViewModelProvider(this, MainViewModelFactory(requireActivity().application, shouldShowCompletedTasks, shouldShowUncompletedTasks))[MainViewModel::class.java]
         viewModel.todoItems.observe(viewLifecycleOwner, Observer {
             onTodoItemsReceived(it)
