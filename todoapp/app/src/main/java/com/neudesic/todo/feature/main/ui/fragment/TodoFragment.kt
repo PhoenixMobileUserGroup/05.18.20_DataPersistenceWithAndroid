@@ -54,6 +54,7 @@ class TodoFragment : Fragment(), OnTodoItemClickedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val preferences = PreferenceManager.getDefaultSharedPreferences(context)
         shouldShowCompletedTasks = preferences.getBoolean("showCompletedTasks", false)
         shouldShowUncompletedTasks = preferences.getBoolean("showUncompletedTasks", false)
